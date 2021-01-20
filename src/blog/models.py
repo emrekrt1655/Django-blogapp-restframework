@@ -35,8 +35,8 @@ class Post(models.Model):
     last_updated = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(User, on_delete= models.CASCADE) 
     status = models.CharField(max_length=10, choices = OPTIONS, default = 'd')
-    slug = models.SlugField(blank=True, unique=True)
     content = models.TextField()
+    slug = models.SlugField(blank=True, unique=True)
     
     def __str__(self):
         return self.title

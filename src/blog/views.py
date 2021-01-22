@@ -21,9 +21,8 @@ class PostDetailView(RetrieveAPIView):
     permission_classes = [AllowAny]
 
 class PostPublishedView(ListAPIView):
+    queryset  = Post.objects.all().filter(published=True)
     serializer_class = PostSerializer
-    queryset = Post.objects.all().filter(published = True)
-    lookup_field = 'slug'
     permission_classes = [AllowAny]
     
 class PostCategoryView(ListAPIView):

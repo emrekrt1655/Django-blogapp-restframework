@@ -21,8 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
     path('api/', include('blog.urls')),
+    
 ]
 
-# urlpatterns += [
-#     re_path(r'^.*', TemplateView.as_view(template_name='index.html'))
-# ]

@@ -42,10 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'dj_rest_auth',
+    'rest_framework.authtoken',
     'corsheaders',
     'django_summernote',
     'blog.apps.BlogConfig',
-    'user'
+    'users.apps.UsersConfig',
+    
 ]
 
 MIDDLEWARE = [
@@ -110,6 +113,15 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        
+    ]
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -126,6 +138,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+
+
 
 STATIC_URL = '/static/'
 

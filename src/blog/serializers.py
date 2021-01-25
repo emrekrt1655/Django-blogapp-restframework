@@ -19,6 +19,7 @@ class CommentSerializer(serializers.ModelSerializer):
         lookup_field='id')
 
 class PostSerializer(serializers.ModelSerializer):
+    author = serializers.SerializerMethodField()
     class Meta:
         model = Post
         fields = ['title', 'slug', 'category',
@@ -28,6 +29,8 @@ class PostSerializer(serializers.ModelSerializer):
                   'like_url'
                    ]
         lookup_field = 'slug'
+    def get_author(self, obj):
+        return obj.author.username
     detail_url = serializers.HyperlinkedIdentityField(
         view_name='detailed-post',
         lookup_field='slug'

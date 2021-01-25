@@ -33,21 +33,16 @@ class PostDetailView(RetrieveAPIView):
     serializer_class = PostDetailSerializer
     lookup_field = 'slug'
     permission_classes = [IsAuthenticated]
-
     
 class PostCategoryView(ListAPIView):
     serializer_class = PostSerializer
     permission_classes = [IsAuthenticated]
-    pagination_class = MyPagination
-    
-    def post(self, request, format=None):
-        data = self.request.data
-        category = data['category']
-        queryset = Post.objects.order_by('-date_created').filter(category__iexact=category)
-        
-        serializer = PostSerializer(queryset, many=True)
-        
-        return Response(serializer.data)
+    def get_queryset(self):
+        category = self.kwargs["category"]
+        queryset = Post.objects.filter(category__iexact=category)
+        return queryset
+
+
     
 class PostCreateApi(CreateAPIView):
     permission_classes = [IsAuthenticated]

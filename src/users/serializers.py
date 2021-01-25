@@ -17,14 +17,51 @@ class UserSerializer(serializers.ModelSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField()
+    
 
     class Meta:
         model = Profile
         fields = (
             "user",
             "image",
-            "bio"
+            "bio",
+            "slug"
+                        
         )
+        lookup_field='slug'
+
+class ProfileDetailSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField()
+    
+
+    class Meta:
+        model = Profile
+        fields = (
+            "user",
+            "image",
+            "bio",
+            "slug",
+            "update_url"
+           
+                        
+        )
+        lookup_field='slug'
+    update_url = serializers.HyperlinkedIdentityField(
+        view_name='user-profile-update',
+        lookup_field='slug'
+    )
+    
+
+    
+class ProfileUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = (
+            'image', 'bio'
+        )        
+    
+
+
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -60,3 +97,4 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+    

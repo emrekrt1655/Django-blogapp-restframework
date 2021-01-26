@@ -1,5 +1,5 @@
-release: pyrhon manage.py makemigrations --no-input
-release: pyrhon manage.py migrate --no-input
+release: python manage.py makemigrations --no-input
+release: python manage.py migrate --no-input
 
 
 web: gunicorn blog_pro.wsgi
